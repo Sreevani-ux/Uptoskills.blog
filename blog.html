@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Animals and Where to Spot Them</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            text-align: center;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .animal-name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>10 Unique Animals You Didn't Know Existed and Where to Spot Them</h1>
+    <div class="slideshow-container" id="slideshow">
+        <!-- Slides will be inserted here by JavaScript -->
+    </div>
+
+    <script>
+        const animals = [
+            { name: "Axolotl", location: "Lake Xochimilco, Mexico", img: "https://via.placeholder.com/800x400?text=Axolotl" },
+            { name: "Saiga Antelope", location: "Eurasian steppes, Kazakhstan", img: "https://via.placeholder.com/800x400?text=Saiga+Antelope" },
+            { name: "Irrawaddy Dolphin", location: "Mekong River, Cambodia", img: "https://via.placeholder.com/800x400?text=Irrawaddy+Dolphin" },
+            { name: "Red Panda", location: "Eastern Himalayas", img: "https://via.placeholder.com/800x400?text=Red+Panda" },
+            { name: "Fossa", location: "Madagascar", img: "https://via.placeholder.com/800x400?text=Fossa" },
+            { name: "Pangolin", location: "Asia and Africa", img: "https://via.placeholder.com/800x400?text=Pangolin" },
+            { name: "Blue Dragon", location: "Coastal waters of South Africa and Australia", img: "https://via.placeholder.com/800x400?text=Blue+Dragon" },
+            { name: "Gharial", location: "Rivers in India and Nepal", img: "https://via.placeholder.com/800x400?text=Gharial" },
+            { name: "Aye-Aye", location: "Madagascar", img: "https://via.placeholder.com/800x400?text=Aye-Aye" },
+            { name: "Shoebill", location: "Swamps of Central Tropical Africa", img: "https://via.placeholder.com/800x400?text=Shoebill" }
+        ];
+
+        const slideshowContainer = document.getElementById('slideshow');
+
+        animals.forEach((animal, index) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.classList.add('slide');
+            if (index === 0) slideDiv.classList.add('active');
+            
+            slideDiv.innerHTML = `
+                <img src="${animal.img}" alt="${animal.name}" style="width:100%">
+                <div class="animal-name">${animal.name}</div>
+                <div>${animal.location}</div>
+            `;
+            slideshowContainer.appendChild(slideDiv);
+        });
+
+        let slideIndex = 0;
+        function showSlides() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        setInterval(showSlides, 3000); // Change slide every 3 seconds
+    </script>
+</body>
+</html>
