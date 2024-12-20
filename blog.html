@@ -3,76 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unique Animals and Where to Spot Them</title>
+    <title>Unique Animals Blog</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-            text-align: center;
-        }
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            margin: auto;
-            overflow: hidden;
-        }
-        .slide {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        .animal-name {
-            font-weight: bold;
-            margin-top: 10px;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .slider { position: relative; width: 100%; max-width: 600px; margin: auto; overflow: hidden; }
+        .slides { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; box-sizing: border-box; text-align: center; }
+        .slide img { width: 100%; max-height: 300px; object-fit: cover; }
+        .navigation { text-align: center; margin-top: 10px; }
+        .navigation button { padding: 10px; margin: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>10 Unique Animals You Didn't Know Existed and Where to Spot Them</h1>
-    <div class="slideshow-container" id="slideshow">
-        <!-- Slides will be inserted here by JavaScript -->
+    <h1>Unique Animals Blog</h1>
+    <div class="slider">
+        <div class="slides" id="slides">
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x300?text=Axolotl" alt="Axolotl">
+                <h2>Axolotl</h2>
+                <p>The axolotl, also known as the Mexican walking fish, is a neotenic salamander.</p>
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x300?text=Fossa" alt="Fossa">
+                <h2>Fossa</h2>
+                <p>The fossa is a cat-like, carnivorous mammal endemic to Madagascar.</p>
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x300?text=Saiga+Antelope" alt="Saiga Antelope">
+                <h2>Saiga Antelope</h2>
+                <p>The saiga antelope is known for its distinctive over-sized nose.</p>
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x300?text=Pangolin" alt="Pangolin">
+                <h2>Pangolin</h2>
+                <p>Pangolins are unique for their protective keratin scales covering their skin.</p>
+            </div>
+            <div class="slide">
+                <img src="https://via.placeholder.com/600x300?text=Shoebill" alt="Shoebill">
+                <h2>Shoebill</h2>
+                <p>The shoebill is a large bird known for its shoe-shaped bill.</p>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
     </div>
 
     <script>
-        const animals = [
-            { name: "Axolotl", location: "Lake Xochimilco, Mexico", img: "https://via.placeholder.com/800x400?text=Axolotl" },
-            { name: "Saiga Antelope", location: "Eurasian steppes, Kazakhstan", img: "https://via.placeholder.com/800x400?text=Saiga+Antelope" },
-            { name: "Irrawaddy Dolphin", location: "Mekong River, Cambodia", img: "https://via.placeholder.com/800x400?text=Irrawaddy+Dolphin" },
-            { name: "Red Panda", location: "Eastern Himalayas", img: "https://via.placeholder.com/800x400?text=Red+Panda" },
-            { name: "Fossa", location: "Madagascar", img: "https://via.placeholder.com/800x400?text=Fossa" },
-            { name: "Pangolin", location: "Asia and Africa", img: "https://via.placeholder.com/800x400?text=Pangolin" },
-            { name: "Blue Dragon", location: "Coastal waters of South Africa and Australia", img: "https://via.placeholder.com/800x400?text=Blue+Dragon" },
-            { name: "Gharial", location: "Rivers in India and Nepal", img: "https://via.placeholder.com/800x400?text=Gharial" },
-            { name: "Aye-Aye", location: "Madagascar", img: "https://via.placeholder.com/800x400?text=Aye-Aye" },
-            { name: "Shoebill", location: "Swamps of Central Tropical Africa", img: "https://via.placeholder.com/800x400?text=Shoebill" }
-        ];
+        let currentIndex = 0;
 
-        const slideshowContainer = document.getElementById('slideshow');
-
-        animals.forEach((animal, index) => {
-            const slideDiv = document.createElement('div');
-            slideDiv.classList.add('slide');
-            if (index === 0) slideDiv.classList.add('active');
-            
-            slideDiv.innerHTML = `
-                <img src="${animal.img}" alt="${animal.name}" style="width:100%">
-                <div class="animal-name">${animal.name}</div>
-                <div>${animal.location}</div>
-            `;
-            slideshowContainer.appendChild(slideDiv);
-        });
-
-        let slideIndex = 0;
-        function showSlides() {
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach(slide => slide.classList.remove('active'));
-            slideIndex = (slideIndex + 1) % slides.length;
-            slides[slideIndex].classList.add('active');
+        function showSlide(index) {
+            const slides = document.getElementById('slides');
+            const totalSlides = slides.children.length;
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
 
-        setInterval(showSlides, 3000); // Change slide every 3 seconds
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
     </script>
 </body>
 </html>
